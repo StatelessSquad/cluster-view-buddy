@@ -42,6 +42,8 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
 }) => {
   const [open, setOpen] = React.useState(false);
 
+  const selectedNamespace = namespaces.find((namespace) => namespace.value === value);
+
   return (
     <div className="flex items-center">
       <Popover open={open} onOpenChange={setOpen}>
@@ -52,9 +54,7 @@ const NamespaceSelector: React.FC<NamespaceSelectorProps> = ({
             aria-expanded={open}
             className="w-[240px] justify-between font-normal"
           >
-            {value === "all"
-              ? "All Namespaces"
-              : namespaces.find((namespace) => namespace.value === value)?.label}
+            {selectedNamespace?.label || "Select namespace"}
             <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
