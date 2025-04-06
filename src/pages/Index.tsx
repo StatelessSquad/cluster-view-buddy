@@ -1,13 +1,30 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React, { useState } from 'react';
+import DashboardLayout from '@/components/DashboardLayout';
+import ClusterOverview from '@/components/ClusterOverview';
+import NodesList from '@/components/NodesList';
+import PodsList from '@/components/PodsList';
+import ResourceUsageCharts from '@/components/ResourceUsageCharts';
+import NamespaceSelector from '@/components/NamespaceSelector';
+
+const Index: React.FC = () => {
+  const [selectedNamespace, setSelectedNamespace] = useState("all");
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <DashboardLayout>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold">Cluster Overview</h2>
+        <NamespaceSelector 
+          value={selectedNamespace} 
+          onChange={setSelectedNamespace} 
+        />
       </div>
-    </div>
+      
+      <ClusterOverview />
+      <ResourceUsageCharts />
+      <NodesList />
+      <PodsList />
+    </DashboardLayout>
   );
 };
 
